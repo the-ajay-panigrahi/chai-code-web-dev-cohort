@@ -14,7 +14,7 @@ I will document my coding journey in this course by updating this repository **w
 Feel free to use anything from this repo. If you have any suggestions, feel free to create a pull request on GitHub.
 
 ### 📬 Contact Me  
-- **Email**: [ajaybpanigrahi@gmail.com](mailto:ajaybpanigrahi@gmail.com)
+- **Email**: [ajaybpanigrahi@gmail.com](https://mailto:ajaybpanigrahi@gmail.com)
 - **LinkedIn**: [ajay-panigrahi](https://www.linkedin.com/in/ajay-panigrahi/)  
 - **Twitter**: [@ajaybpanigrahi](https://x.com/ajaybpanigrahi)
 
