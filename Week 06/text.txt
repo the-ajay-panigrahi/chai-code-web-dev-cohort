@@ -1,0 +1,39 @@
+variables and data types, if else, switch, loops, functions, Arrays(and its methods), String(and its methods),Polyfills, Prototype(__proto__ aur .prototype)
+
+
+
+
+
+
+
+
+
+Week 6 -------------------------
+Objects - correct definition in js would be not collection of key value pairs, but it would be a real world entity that has properties(attributes) and behaviour/methods(actions/functions)
+
+Class, Object, new, constructor(default & parameterized), __proto__ & Array.prototype(arr.__proto__ === Array.prototype)
+
+Prototype chaining/inheritance
+
+Note: In Js Every thing is an Object
+Also prototypes are for internal working never touch it
+
+extends keyword
+
+2nd Class ----
+arrow function, function declaration, function expression, Function.prototype .... this.name
+First class functions (functions ko normal variable ke tarah treat kiya jaa raha hai)
+
+IIFE
+
+DOM -(Document Object Model - Manipulating html using js), window(global object) - allows you to interact with the browser window, window.document/document => points to the doc(html) 
+
+Onclick, Event Listeners
+
++ todo project(add, delete individual, delete all, edit)
++ calculator
++ BMI index
++ Review Collector(form+stars and show on side 2hr 13min)
+Week 6 -------------------------
+
+
