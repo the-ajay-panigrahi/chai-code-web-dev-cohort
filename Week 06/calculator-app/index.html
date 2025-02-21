@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.0.1/math.js"
+      type="text/javascript"
+    ></script>
+  </head>
+  <body>
+    <main>
+      <input type="text" id="input" readonly />
+      <div class="row">
+        <div class="btn" onclick="btnClicked('7')">7</div>
+        <div class="btn" onclick="btnClicked('8')">8</div>
+        <div class="btn" onclick="btnClicked('9')">9</div>
+        <div class="btn" onclick="btnClicked('/')">/</div>
+      </div>
+      <div class="row">
+        <div class="btn" onclick="btnClicked('4')">4</div>
+        <div class="btn" onclick="btnClicked('5')">5</div>
+        <div class="btn" onclick="btnClicked('6')">6</div>
+        <div class="btn" onclick="btnClicked('*')">*</div>
+      </div>
+      <div class="row">
+        <div class="btn" onclick="btnClicked('1')">1</div>
+        <div class="btn" onclick="btnClicked('2')">2</div>
+        <div class="btn" onclick="btnClicked('3')">3</div>
+        <div class="btn" onclick="btnClicked('-')">-</div>
+      </div>
+      <div class="row">
+        <div class="btn clear" onclick="clearDisplay()">C</div>
+        <div class="btn" onclick="btnClicked('0')">0</div>
+        <div class="btn" onclick="btnClicked('.')">.</div>
+        <div class="btn result" onclick="calculate()">=</div>
+      </div>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

@@ -30,8 +30,6 @@ DOM -(Document Object Model - Manipulating html using js), window(global object)
 
 Onclick, Event Listeners
 
-+ todo project(add, delete individual, delete all, edit)
-+ calculator
 + BMI index
 + Review Collector(form+stars and show on side 2hr 13min)
 Week 6 -------------------------
