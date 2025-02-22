@@ -30,8 +30,5 @@ DOM -(Document Object Model - Manipulating html using js), window(global object)
 
 Onclick, Event Listeners
 
-+ Review Collector(form+stars and show on side 2hr 13min)
 Week 6 -------------------------
 
-
-828691735416

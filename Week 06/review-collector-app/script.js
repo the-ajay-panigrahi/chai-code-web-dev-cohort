@@ -40,6 +40,15 @@ function setStarRatings(stars) {
   }
 }
 
+function resetStars() {
+  rating = 0;
+  star1.style.color = "gray";
+  star2.style.color = "gray";
+  star3.style.color = "gray";
+  star4.style.color = "gray";
+  star5.style.color = "gray";
+}
+
 star1.addEventListener("click", () => {
   setStarRatings(1);
 });
@@ -68,7 +77,9 @@ submitBtn.addEventListener("click", (event) => {
               ${reviewInput.value}
             </p>
             <p class="card-text">
-              ${"⭐".repeat(rating)}${`<i style="font-size:14px" class="fa-solid fa-star"></i>`.repeat(
+              ${"⭐".repeat(
+                rating
+              )}${`<i style="font-size:14px" class="fa-solid fa-star"></i>`.repeat(
       5 - rating
     )}
             </p>
@@ -78,5 +89,6 @@ submitBtn.addEventListener("click", (event) => {
 
     nameInput.value = "";
     reviewInput.value = "";
+    resetStars();
   }
 });
