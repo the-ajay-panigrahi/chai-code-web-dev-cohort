@@ -75,10 +75,16 @@ let proxyArray = new Proxy(array, {
 // console.log(proxyArray[-2]);
 // console.log(proxyArray[-3]);
 // console.log(proxyArray[-4]);
+// console.log(proxyArray[-5]);
+// console.log(proxyArray[-6]);
+// console.log(proxyArray[-7]);
+// console.log(proxyArray[-8]);
+// console.log(proxyArray[-9]);
 
 // proxyArray[0] = null; // <Revoked Proxy>
+// proxyArray[-9] = null; // <Revoked Proxy>
 // proxyArray[0] = "sample";
 // proxyArray[-1] = null;
 // proxyArray[-2] = "Haanji";
 // console.log(array);
-// console.log(proxyArray);
+console.log(proxyArray);
