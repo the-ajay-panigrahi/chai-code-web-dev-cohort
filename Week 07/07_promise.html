@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Promises</title>
+  </head>
+  <body>
+    <ul id="ul-container"></ul>
+    <script>
+      const ul = document.getElementById("ul-container");
+
+      fetch("https://api.freeapi.app/api/v1/public/randomproducts")
+        .then((response) => {
+          console.log("response", response);
+
+          return response.json();
+        })
+        .then((realData) => {
+          const products = realData.data.data;
+          products.forEach((prod) => {
+            const li = document.createElement("li");
+            li.innerText = prod.title;
+            ul.appendChild(li);
+          });
+        })
+        .catch((errro) => {
+          throw new Error(error);
+        });
+
+      /* 
+In JavaScript, The Promise object represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
+
+A Promise is in one of these states:
+pending: initial state, neither fulfilled nor rejected.
+fulfilled: meaning that the operation was completed successfully.
+rejected: meaning that the operation failed.
+
+A promise is said to be settled if it is either fulfilled or rejected, but not pending.
+
+.then() → Runs when the Promise is fulfilled (success).
+.catch() → Runs when the Promise is rejected (error).
+.finally() → Runs regardless of success or failure.
+
+A Promise represents the result of an asynchronous operation and acts as a placeholder for a future value.
+
+It takes a callback function inside .then() for success.
+It takes a callback function inside .catch() for failure.
+It runs a callback function inside .finally() regardless of the outcome.
+So, in simple terms: A Promise handles async operations and executes user-defined functions (callbacks) when completed.
+*/
+    </script>
+  </body>
+</html>
