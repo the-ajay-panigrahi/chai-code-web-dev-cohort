@@ -61,7 +61,7 @@ if (!Array.prototype.myReduce) {
     }
 
     // empty array hai aur initial diya hai
-    if (this.length === 0 && arguments.length>=2) {
+    if (this.length === 0 && arguments.length >= 2) {
       return initialValue;
     }
 
@@ -91,4 +91,119 @@ if (!Array.prototype.myReduce) {
 
 // console.log(result3);
 
+// Promise Polyfill(in this version promise chaining is not supported)
+class MyPromise {
+  constructor(executorFunction) {
+    this._state = "pending";
+    this._successCallBacks = [];
+    this._errorCallBacks = [];
+    this._finallyCallBacks = [];
+    this.value = undefined;
+    executorFunction(
+      this.resolverFunction.bind(this),
+      this.rejectorFunction.bind(this)
+    );
+  }
 
+  then(callBack) {
+    if (this._state === "fulfilled") {
+      callBack(this.value);
+      return this;
+    }
+
+    this._successCallBacks.push(callBack);
+    return this;
+  }
+
+  catch(callBack) {
+    if (this._state === "rejected") {
+      callBack(this.value);
+      return this;
+    }
+
+    this._errorCallBacks.push(callBack);
+    return this;
+  }
+
+  finally(callBack) {
+    if (this._state !== "pending") {
+      callBack();
+      return this;
+    }
+    this._finallyCallBacks.push(callBack);
+  }
+
+  resolverFunction(value) {
+    this._state = "fulfilled";
+    this.value = value;
+    this._successCallBacks.forEach((cb) => {
+      cb(value);
+    });
+    this._finallyCallBacks.forEach((cb) => {
+      cb();
+    });
+  }
+  rejectorFunction(error) {
+    this._state = "rejected";
+    this.value = value;
+    this._errorCallBacks.forEach((cb) => {
+      cb(error);
+    });
+    this._finallyCallBacks.forEach((cb) => {
+      cb();
+    });
+  }
+}
+
+function wait(timeInSeconds) {
+  return new MyPromise((resolve, reject) => {
+    // setTimeout(() => {
+    //   resolve(4);
+    //   //   reject("Main hoon giyaan, main hoon bada taakatwer");
+    // }, timeInSeconds * 1000);
+    resolve(0);
+  });
+
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       resolve(timeInSeconds);
+  //     }, timeInSeconds * 1000);
+  //   });
+}
+
+wait(0)
+  .then((time) => {
+    console.log(`Promise resolved after ${time}s`);
+  })
+  .catch((error) => {
+    console.log(`Promise rejected`);
+    throw new Error(error);
+  })
+  .finally(() => {
+    console.log(`Main toh har baar chalunga ji!`);
+  });
+
+wait(0)
+  .then((time) => {
+    console.log(`Promise resolved after ${time}s`);
+  })
+  .catch((error) => {
+    console.log(`Promise rejected`);
+    throw new Error(error);
+  })
+  .finally(() => {
+    console.log(`Main toh har baar chalunga ji!`);
+  });
+
+/*
+     Promise Observations :-
+     - jab Promise ka object banate ho toh sath me ek executor function doo
+     - executor function ke paas resolve() aur reject() ka access hai
+     - resolve ko call karne par:
+                          - promise fulfill hojata hai
+                          - saare .then() execute hojaate hai
+     - reject ko call karne par:
+                          - promise reject hojata hai
+                          - saare .catch() execute hojaate hai
+     - finally() ko toh har baar call karna hi hai     
+*/
