@@ -1,0 +1,40 @@
+<!-- 
+Debouncing in JavaScript 
+    Debouncing is a programming technique used to limit the rate at which a function is executed. It ensures that a function (like an API call or event handler) is only invoked after a specific period of inactivity.
+
+    Why Use Debouncing?
+     Prevents excessive function calls (e.g., API requests on every keystroke).
+     Optimizes performance by reducing unnecessary computations.
+     Commonly used in search bars, input fields, resize events, etc.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debounce</title>
+  </head>
+  <body>
+    <input type="text" onkeyup="betterFunction()" />
+    <script>
+      let counter = 0;
+      const getData = () => {
+        // calls an API and gets data
+        console.log(`Fetching Data - ${counter++}`);
+      };
+
+      const debounce = function (fn, delay) {
+        let timer;
+        return function (...sample) {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            fn.apply(this, sample);
+            // fn();
+          }, delay);
+        };
+      };
+
+      const betterFunction = debounce(getData, 600);
+    </script>
+  </body>
+</html>
