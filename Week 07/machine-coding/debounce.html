@@ -26,9 +26,10 @@ Debouncing in JavaScript
       const debounce = function (fn, delay) {
         let timer;
         return function (...sample) {
+          let context = this;
           clearTimeout(timer);
           timer = setTimeout(() => {
-            fn.apply(this, sample);
+            fn.apply(context, sample);
             // fn();
           }, delay);
         };

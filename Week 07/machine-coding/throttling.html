@@ -1,0 +1,45 @@
+<!-- 
+⏳ Throttling in JavaScript
+🔹 What is Throttling?
+Throttling is a technique that ensures a function executes at most once in a fixed time interval, even if the event occurs multiple times.
+
+Unlike debouncing, which delays execution until inactivity, throttling ensures periodic execution.
+
+💡 Why Use Throttling?
+🔹 Prevents excessive function calls (e.g., limiting API requests).
+🔹 Improves performance by reducing unnecessary executions.
+🔹 Ensures responsiveness while still handling frequent events. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Throttling</title>
+  </head>
+  <body>
+    <script>
+      let counter = 0;
+      const expensiveFn = () => {
+        console.log("Expensive", counter++);
+      };
+
+      const throttle = function (fn, delay) {
+        let flag = true;
+        return function (...args) {
+          let context = this;
+          if (flag) {
+            fn.apply(context, args);
+            flag = false;
+            setTimeout(() => {
+              flag = true;
+            }, delay);
+          }
+        };
+      };
+
+      const betterExpensiveFn = throttle(expensiveFn, 300);
+      window.addEventListener("resize", betterExpensiveFn);
+    </script>
+  </body>
+</html>
