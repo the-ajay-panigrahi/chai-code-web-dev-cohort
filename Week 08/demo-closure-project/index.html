@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Color Button Generator</title>
+    <link
+      rel="shortcut icon"
+      href="./assets/chai-tea.png"
+      type="image/x-icon"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #container {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        transform: scale(1.5);
+      }
+
+      #input {
+        padding: 10px;
+        width: 325px;
+        border: 2px solid #cccccc;
+        border-radius: 10px;
+        font-weight: bolder;
+      }
+
+      #btn {
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        background-color: #000;
+        color: white;
+        font-weight: bolder;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+      }
+
+      #btn:hover {
+        background-color: #2c2c2c;
+      }
+
+      #btn-area {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 10px;
+      }
+
+      @media only screen and (max-width: 800px) {
+        #container {
+          padding: 20px;
+          transform: scale(1);
+        }
+
+        #main {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body id="body">
+    <div id="container">
+      <div id="main">
+        <input
+          type="text"
+          id="input"
+          placeholder="Enter the color of the button you wish to create"
+        />
+        <button id="btn">Create Button</button>
+      </div>
+      <div id="btn-area"></div>
+    </div>
+    <script>
+      const createBtn = document.getElementById("btn");
+      const btnArea = document.getElementById("btn-area");
+      const input = document.getElementById("input");
+
+      function newBtnCreate() {
+        const color = input.value.trim();
+
+        if (CSS.supports("color", color)) {
+          let newBtn = document.createElement("button");
+          newBtn.innerText = color;
+          newBtn.style.backgroundColor = input.value;
+          newBtn.style.border = "none";
+          newBtn.style.padding = "10px 15px";
+          newBtn.style.fontWeight = "bolder";
+          newBtn.style.borderRadius = "7px";
+          newBtn.style.cursor = "pointer";
+          newBtn.addEventListener("click", () => {
+            document.getElementById("body").style.backgroundColor = color;
+          });
+          btnArea.appendChild(newBtn);
+          input.value = "";
+        } else {
+          alert("Invalid Color!");
+          input.value = "";
+        }
+      }
+
+      createBtn.addEventListener("click", newBtnCreate);
+      input.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+          newBtnCreate();
+        }
+      });
+    </script>
+  </body>
+</html>
