@@ -7,24 +7,20 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div id="todo-board" class="board">
-      <div id="todo-upper-part">
+    <main>
+      <section id="todo-board" class="board">
         <h4>To Do</h4>
-        <div class="card">Learn Html</div>
-        <div class="card">Learn CSS</div>
-        <div class="card">Learn JS</div>
-      </div>
-      <button class="create-new-task-btn">Create New Task</button>
-    </div>
-    <div id="doing-board" class="board">
-      <div id="doing-upper-part"><h4>Doing</h4></div>
-      <button class="create-new-task-btn">Create New Task</button>
-    </div>
-    <div id="done-board" class="board">
-      <div id="done-upper-part"><h4>Done</h4></div>
-      <button class="create-new-task-btn">Create New Task</button>
-    </div>
-
+        <p class="task" draggable="true">Learn Html</p>
+        <p class="task" draggable="true">Learn Css</p>
+      </section>
+      <section id="doing-board" class="board">
+        <h4>Doing</h4>
+      </section>
+      <section id="done-board" class="board">
+        <h4>Done</h4>
+      </section>
+    </main>
+    <button id="add-new-task-btn">Add New Task</button>
     <script src="./script.js"></script>
   </body>
 </html>

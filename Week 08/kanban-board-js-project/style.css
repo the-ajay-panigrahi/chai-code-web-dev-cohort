@@ -8,55 +8,65 @@
 }
 
 body {
-  min-height: 100vh;
+  background-color: #e9c46a;
+}
+
+main {
   display: flex;
+  flex-direction: row;
   gap: 20px;
   padding: 20px;
-  background-color: #000;
 }
 
 .board {
-  border: 3px solid black;
-  width: 400px;
-  padding: 15px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  /* align-items: center; */
-  background-color: #fff;
+  background-color: #f4a261;
+  height: 80vh;
+  width: 300px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .board h4 {
-  text-align: center;
+  color: #fff;
   font-size: 30px;
+  letter-spacing: 1px;
 }
 
-.card {
-  background-color: #cad2c5;
-  padding: 15px 20px;
-  margin: 10px;
-  font-weight: bold;
-  letter-spacing: 0.7px;
-  font-size: 18px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.create-new-task-btn {
-  padding: 15px 20px;
-  font-size: 19px;
-  font-weight: bolder;
-  background-color: #354f52;
-  border-radius: 10px;
-  box-shadow: 5px 7px #888888;
-  transition: all 0.3s ease-in-out;
+.task {
+  background-color: #e76f51;
+  margin: 20px 0px;
+  padding: 10px 10px;
   color: #ffffff;
-  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
 }
 
-.create-new-task-btn:hover {
-  background-color: #233436;
-  cursor: pointer;
+.task:hover {
+  background-color: #b95c44;
+}
+
+#add-new-task-btn {
+  background-color: #264653;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 7px;
+  color: #ffffff;
+  font-size: 19px;
+  font-weight: bold;
   transition: all 0.3s ease-in-out;
+  margin: 20px 30px;
+}
+
+#add-new-task-btn:hover {
+  background-color: #13232a;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }
