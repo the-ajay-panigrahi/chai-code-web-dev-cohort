@@ -31,9 +31,12 @@ addNewTaskBtn.addEventListener("click", () => {
     modalInput.value = "";
     modal.classList.add("hidden");
     if (!taskString) return;
-    const task = document.createElement("p");
+    const task = document.createElement("div");
     task.classList.add("task");
-    task.innerText = taskString;
+    task.innerHTML = `${taskString} <div class="extra-features">
+            <img class="editIcon"  src="./assets/pencil.png" alt="pencil" />
+            <img class="deleteIcon" src="./assets/delete.png" alt="delete" />
+          </div>`;
     task.setAttribute("draggable", true);
     attachDragEvent(task);
     todoBoard.appendChild(task);

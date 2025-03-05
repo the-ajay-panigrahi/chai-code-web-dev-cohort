@@ -44,6 +44,9 @@ main {
   cursor: pointer;
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .task:hover {
@@ -120,4 +123,20 @@ main {
 #inner-modal button:hover {
   background-color: #13232a;
   cursor: pointer;
+}
+
+.editIcon {
+  width: 20px;
+  object-fit: contain;
+}
+
+.deleteIcon {
+  width: 20px;
+  object-fit: contain;
+}
+
+.extra-features {
+  min-width: 70px;
+  display: flex;
+  justify-content: space-around;
 }
