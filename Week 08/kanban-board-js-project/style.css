@@ -68,5 +68,56 @@ main {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
+}
+
+#modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.395);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#inner-modal {
+  background-color: #2a9d8f;
+  width: 500px;
+  /* height: 300px; */
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  gap: 15px;
+}
+
+#inner-modal input {
+  padding: 10px 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+#inner-modal button {
+  background-color: #264653;
+  border-radius: 6px;
+  font-weight: bolder;
+  font-size: 16px;
+  color: #ffffff;
+  border: none;
+  padding: 10px 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+#inner-modal button:hover {
+  background-color: #13232a;
+  cursor: pointer;
 }

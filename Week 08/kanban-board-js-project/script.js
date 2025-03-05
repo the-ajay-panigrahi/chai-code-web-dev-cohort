@@ -2,6 +2,9 @@ const addNewTaskBtn = document.getElementById("add-new-task-btn");
 const todoBoard = document.getElementById("todo-board");
 const allTasks = document.querySelectorAll(".task");
 const allBoards = document.querySelectorAll(".board");
+const modal = document.getElementById("modal");
+const modalInput = document.querySelector("#modal input");
+const modalDoneBtn = document.querySelector("#modal button");
 
 function attachDragEvent(targetElement) {
   targetElement.addEventListener("dragstart", (event) => {
@@ -22,14 +25,19 @@ allTasks.forEach((tasks) => {
 });
 
 addNewTaskBtn.addEventListener("click", () => {
-  const taskString = prompt("Enter task");
-  if (!taskString) return;
-  const task = document.createElement("p");
-  task.classList.add("task");
-  task.innerText = taskString;
-  task.setAttribute("draggable", true);
-  attachDragEvent(task);
-  todoBoard.appendChild(task);
+  modal.classList.remove("hidden");
+  modalDoneBtn.addEventListener("click", () => {
+    const taskString = modalInput.value;
+    modalInput.value = "";
+    modal.classList.add("hidden");
+    if (!taskString) return;
+    const task = document.createElement("p");
+    task.classList.add("task");
+    task.innerText = taskString;
+    task.setAttribute("draggable", true);
+    attachDragEvent(task);
+    todoBoard.appendChild(task);
+  });
 });
 
 allBoards.forEach((board) => {
