@@ -42,9 +42,13 @@ function addTaskToDOM(taskText, boardId = "todo") {
   task.setAttribute("draggable", "true");
   task.addEventListener("dragstart", () => {
     task.classList.add("dragging");
+    setTimeout(() => {
+      task.classList.add("hidden");
+    }, 10);
   });
   task.addEventListener("dragend", () => {
     task.classList.remove("dragging");
+    task.classList.remove("hidden");
   });
 
   task.querySelector(".edit-btn").addEventListener("click", () => {

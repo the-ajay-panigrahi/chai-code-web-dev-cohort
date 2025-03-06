@@ -187,3 +187,7 @@ label {
 #board-select:focus {
   border-color: #007bff;
 }
+
+.hidden {
+  display: none;
+}
