@@ -11,7 +11,10 @@
     <main id="board-container">
       <section class="board">
         <h2>To Do</h2>
-        <div class="task-list"></div>
+        <div class="task-list">
+          <div class="task">Learn HTML</div>
+          <div class="task">Learn CSS</div>
+        </div>
       </section>
       <section class="board">
         <h2>Doing</h2>
@@ -22,5 +25,20 @@
         <div class="task-list"></div>
       </section>
     </main>
+    <button id="open-modal">Add Task</button>
+    <div id="modal">
+      <div id="modal-content">
+        <span class="close">&times;</span>
+        <h2>Add New Task</h2>
+        <input
+          type="text"
+          placeholder="Please enter your task"
+          id="task-input"
+        />
+        <button id="add-task-btn">Add Task</button>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
   </body>
 </html>
