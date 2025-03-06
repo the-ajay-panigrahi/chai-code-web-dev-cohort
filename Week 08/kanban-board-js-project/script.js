@@ -83,15 +83,17 @@ window.addEventListener("click", function (event) {
 
 addTaskBtn.addEventListener("click", function () {
   const taskText = taskInput.value.trim();
+  const selectedBoard = document.getElementById("board-select").value;
   if (taskText === "") {
     alert("Please enter a task!");
     return;
   }
 
-  addTaskToDOM(taskText);
+  addTaskToDOM(taskText, selectedBoard);
   saveTasks();
 
   taskInput.value = "";
+  document.getElementById("board-select").value = "todo";
   modal.style.display = "none";
 });
 
