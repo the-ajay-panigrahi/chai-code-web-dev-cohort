@@ -73,9 +73,11 @@ function addTaskToDOM(taskText, boardId = "todo") {
 
 openModalBtn.addEventListener("click", function () {
   modal.style.display = "flex";
+  modal.classList.add("show");
 });
 
 closeModalBtn.addEventListener("click", function () {
+  modal.classList.remove("show");
   modal.style.display = "none";
 });
 
