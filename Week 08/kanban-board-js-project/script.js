@@ -29,8 +29,48 @@ addTaskBtn.addEventListener("click", function () {
 
   const task = document.createElement("div");
   task.classList.add("task");
-  task.textContent = taskText;
+  task.innerHTML = `
+    <span class="task-text">${taskText}</span>
+    <button class="edit-btn">
+      <img src="./assets/pencil.png" alt="Edit" width="20">
+    </button>
+    <button class="delete-btn">
+      <img src="./assets/delete.png" alt="Delete" width="20">
+    </button>
+  `;
+
+  task.setAttribute("draggable", "true");
+  task.addEventListener("dragstart", () => {
+    task.classList.add("dragging");
+  });
+  task.addEventListener("dragend", () => {
+    task.classList.remove("dragging");
+  });
+
+  task.querySelector(".edit-btn").addEventListener("click", () => {
+    const newText = prompt(
+      "Edit your task:",
+      task.querySelector(".task-text").textContent
+    );
+    if (newText) task.querySelector(".task-text").textContent = newText;
+  });
+
+  task.querySelector(".delete-btn").addEventListener("click", () => {
+    task.remove();
+  });
+
   todoList.appendChild(task);
   taskInput.value = "";
   modal.style.display = "none";
+});
+
+document.querySelectorAll(".task-list").forEach((board) => {
+  board.addEventListener("dragover", (e) => {
+    e.preventDefault();
+  });
+
+  board.addEventListener("drop", (e) => {
+    const draggedTask = document.querySelector(".dragging");
+    if (draggedTask) board.appendChild(draggedTask);
+  });
 });
