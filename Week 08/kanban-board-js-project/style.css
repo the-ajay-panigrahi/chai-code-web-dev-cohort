@@ -121,9 +121,44 @@ body {
   font-weight: bold;
   border-radius: 4px;
   transition: all 0.3s ease-in;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
 }
 
 .task:hover {
   background: #000000;
   border: none;
+}
+
+.task-text {
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.edit-btn,
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-btn img,
+.delete-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+#btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }

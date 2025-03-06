@@ -29,14 +29,25 @@ addTaskBtn.addEventListener("click", function () {
 
   const task = document.createElement("div");
   task.classList.add("task");
+  //   task.innerHTML = `
+  //     <span class="task-text">${taskText}</span>
+  //     <button class="edit-btn">
+  //       <img src="./assets/pencil.png" alt="Edit" width="20">
+  //     </button>
+  //     <button class="delete-btn">
+  //       <img src="./assets/delete.png" alt="Delete" width="20">
+  //     </button>
+  //   `;
   task.innerHTML = `
     <span class="task-text">${taskText}</span>
+    <div id="btn-container">
     <button class="edit-btn">
       <img src="./assets/pencil.png" alt="Edit" width="20">
     </button>
     <button class="delete-btn">
       <img src="./assets/delete.png" alt="Delete" width="20">
     </button>
+    </div>
   `;
 
   task.setAttribute("draggable", "true");
