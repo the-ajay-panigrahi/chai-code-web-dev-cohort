@@ -83,6 +83,10 @@ body {
   transform: scale(1.05);
 }
 
+.card.dragging {
+  display: none;
+}
+
 .context-menu {
   display: none;
   position: absolute;

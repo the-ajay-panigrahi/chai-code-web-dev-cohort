@@ -32,7 +32,10 @@ function createTaskElement(taskText) {
 }
 
 function dragStart() {
-  this.classList.add("dragging");
+  setTimeout(() => {
+    this.classList.add("dragging");
+  }, 100);
+
   draggedCard = this;
 }
 function dragEnd() {
@@ -47,7 +50,37 @@ columns.forEach((column) => {
 
 function dragOver(event) {
   event.preventDefault(); // drop
-  this.appendChild(draggedCard);
+
+  const afterElement = getDragAfterElement(this, event.pageY);
+
+  if (afterElement === null) {
+    this.appendChild(draggedCard);
+  } else {
+    this.insertBefore(draggedCard, afterElement);
+  }
+}
+
+function getDragAfterElement(container, y) {
+  const draggableElements = [
+    ...container.querySelectorAll(".card:not(.dragging)"),
+  ]; // nodelist to array
+
+  const result = draggableElements.reduce(
+    (closest, child) => {
+      const box = child.getBoundingClientRect();
+
+      const offset = y - box.top - box.height / 2;
+      console.log(offset);
+
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child };
+      } else {
+        return closest;
+      }
+    },
+    { offset: Number.NEGATIVE_INFINITY }
+  );
+  return result.element;
 }
 
 const contextMenu = document.getElementsByClassName("context-menu")[0];
