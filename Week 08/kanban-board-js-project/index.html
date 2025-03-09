@@ -4,48 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kanban Board</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="shortcut icon"
-      href="https://avatars.githubusercontent.com/u/168801266?v=4"
-      type="image/x-icon"
-    />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <h1>Kanban Board</h1>
-    <main id="board-container">
-      <section class="board">
-        <h2>To Do</h2>
-        <div id="todo" class="task-list"></div>
-      </section>
-      <section class="board">
-        <h2>Doing</h2>
-        <div id="doing" class="task-list"></div>
-      </section>
-      <section class="board">
-        <h2>Done</h2>
-        <div id="done" class="task-list"></div>
-      </section>
-    </main>
-    <button id="open-modal">Add Task</button>
-    <div id="modal">
-      <div id="modal-content">
-        <span class="close">&times;</span>
-        <h2>Add New Task</h2>
+    <div class="board">
+      <div class="column" id="todo">
+        <h2>To Do (<span id="todo-count">0</span>)</h2>
+        <div class="tasks" id="todo-tasks"></div>
         <input
           type="text"
-          placeholder="Please enter your task"
-          id="task-input"
+          class="task-input"
+          id="todo-input"
+          placeholder="Add a task"
         />
-        <label for="board-select">Choose Board:</label>
-        <select id="board-select">
-          <option value="todo">To Do</option>
-          <option value="doing">Doing</option>
-          <option value="done">Done</option>
-        </select>
-
-        <button id="add-task-btn">Add Task</button>
+        <button class="add-task" onclick="addTask('todo')">Add Task</button>
       </div>
+
+      <div class="column" id="doing">
+        <h2>Doing (<span id="doing-count">0</span>)</h2>
+        <div class="tasks" id="doing-tasks"></div>
+        <input
+          type="text"
+          class="task-input"
+          id="doing-input"
+          placeholder="Add a task"
+        />
+        <button class="add-task" onclick="addTask('doing')">Add Task</button>
+      </div>
+
+      <div class="column" id="done">
+        <h2>Done (<span id="done-count">0</span>)</h2>
+        <div class="tasks" id="done-tasks"></div>
+        <input
+          type="text"
+          class="task-input"
+          id="done-input"
+          placeholder="Add a task"
+        />
+        <button class="add-task" onclick="addTask('done')">Add Task</button>
+      </div>
+    </div>
+
+    <div class="context-menu">
+      <ul>
+        <li onclick="editTask()">Edit</li>
+        <li onclick="deleteTask()">Delete</li>
+      </ul>
     </div>
 
     <script src="./script.js"></script>

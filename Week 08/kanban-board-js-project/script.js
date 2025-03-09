@@ -1,118 +1,164 @@
-const openModalBtn = document.getElementById("open-modal");
-const modal = document.getElementById("modal");
-const closeModalBtn = document.querySelector(".close");
-const addTaskBtn = document.getElementById("add-task-btn");
-const taskInput = document.getElementById("task-input");
-// const todoList = document.querySelectorAll(".task-list")[0];
-const todoList = document.querySelector(".task-list");
+let draggedCard = null;
+let rightClickedCard = null;
 
-document.addEventListener("DOMContentLoaded", function () {
-  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  tasks.forEach((task) => {
-    addTaskToDOM(task.text, task.boardId);
-  });
-});
+document.addEventListener("DOMContentLoaded", loadTasksFromLocalStorage);
 
-function saveTasks() {
-  const tasks = [];
-  document.querySelectorAll(".task").forEach((task) => {
-    tasks.push({
-      text: task.querySelector(".task-text").textContent,
-      boardId: task.parentElement.id,
-    });
-  });
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-}
-
-function addTaskToDOM(taskText, boardId = "todo") {
-  const task = document.createElement("div");
-  task.classList.add("task");
-  task.innerHTML = `
-    <span class="task-text">${taskText}</span>
-    <div id="btn-container">
-    <button class="edit-btn">
-      <img src="./assets/pencil.png" alt="Edit" width="20">
-    </button>
-    <button class="delete-btn">
-      <img src="./assets/delete.png" alt="Delete" width="20">
-    </button>
-    </div>
-  `;
-
-  task.setAttribute("draggable", "true");
-  task.addEventListener("dragstart", () => {
-    task.classList.add("dragging");
-    setTimeout(() => {
-      task.classList.add("hidden");
-    }, 10);
-  });
-  task.addEventListener("dragend", () => {
-    task.classList.remove("dragging");
-    task.classList.remove("hidden");
-  });
-
-  task.querySelector(".edit-btn").addEventListener("click", () => {
-    const newText = prompt(
-      "Edit your task:",
-      task.querySelector(".task-text").textContent
-    );
-    if (newText) {
-      task.querySelector(".task-text").textContent = newText;
-      saveTasks();
-    }
-  });
-
-  task.querySelector(".delete-btn").addEventListener("click", () => {
-    task.remove();
-    saveTasks();
-  });
-
-  //   todoList.appendChild(task);
-  document.getElementById(boardId).appendChild(task);
-}
-
-openModalBtn.addEventListener("click", function () {
-  modal.style.display = "flex";
-  modal.classList.add("show");
-});
-
-closeModalBtn.addEventListener("click", function () {
-  modal.classList.remove("show");
-  modal.style.display = "none";
-});
-
-window.addEventListener("click", function (event) {
-  if (event.target === modal) {
-    modal.style.display = "none";
-  }
-});
-
-addTaskBtn.addEventListener("click", function () {
-  const taskText = taskInput.value.trim();
-  const selectedBoard = document.getElementById("board-select").value;
+function addTask(columnId) {
+  const input = document.getElementById(`${columnId}-input`);
+  const taskText = input.value.trim();
   if (taskText === "") {
-    alert("Please enter a task!");
     return;
   }
+  const taskDate = new Date().toLocaleString();
+  const taskElement = createTaskElement(taskText, taskDate); // Pass date
+  document.getElementById(`${columnId}-tasks`).appendChild(taskElement);
+  saveTaskToLocalStorage(columnId, taskText, taskDate);
+  input.value = "";
+  updateTaskCount(columnId);
+}
 
-  addTaskToDOM(taskText, selectedBoard);
-  saveTasks();
+function createTaskElement(taskText, taskDate = null) {
+  const taskElement = document.createElement("div");
+  taskElement.classList.add("card");
 
-  taskInput.value = "";
-  document.getElementById("board-select").value = "todo";
-  modal.style.display = "none";
+  if (!taskDate) {
+    const now = new Date();
+    taskDate = now.toLocaleString();
+  }
+
+  taskElement.innerHTML = `<span>${taskText}</span><br><small id="time">${taskDate}</small>`;
+
+  taskElement.draggable = true;
+  taskElement.addEventListener("dragstart", dragStart);
+  taskElement.addEventListener("dragend", dragEnd);
+  taskElement.addEventListener("contextmenu", function (event) {
+    event.preventDefault();
+    rightClickedCard = this;
+    console.log(event.pageX, event.pageY);
+
+    showContextMenu(event.pageX, event.pageY);
+  });
+  return taskElement;
+}
+
+function dragStart() {
+  setTimeout(() => {
+    this.classList.add("dragging");
+  }, 100);
+
+  draggedCard = this;
+}
+function dragEnd() {
+  this.classList.remove("dragging");
+  draggedCard = null;
+  updateLocalStorage();
+  ["todo", "doing", "done"].forEach(updateTaskCount);
+}
+
+const columns = document.querySelectorAll(".column .tasks");
+columns.forEach((column) => {
+  column.addEventListener("dragover", dragOver);
 });
 
-document.querySelectorAll(".task-list").forEach((board) => {
-  board.addEventListener("dragover", (e) => {
-    e.preventDefault();
-  });
+function dragOver(event) {
+  event.preventDefault();
 
-  board.addEventListener("drop", (e) => {
-    const draggedTask = document.querySelector(".dragging");
-    if (draggedTask) {
-      board.appendChild(draggedTask);
-      saveTasks();
+  const afterElement = getDragAfterElement(this, event.pageY);
+
+  if (afterElement === null) {
+    this.appendChild(draggedCard);
+  } else {
+    this.insertBefore(draggedCard, afterElement);
+  }
+}
+
+function getDragAfterElement(container, y) {
+  const draggableElements = [
+    ...container.querySelectorAll(".card:not(.dragging)"),
+  ];
+
+  const result = draggableElements.reduce(
+    (closest, child) => {
+      const box = child.getBoundingClientRect();
+
+      const offset = y - box.top - box.height / 2;
+      console.log(offset);
+
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child };
+      } else {
+        return closest;
+      }
+    },
+    { offset: Number.NEGATIVE_INFINITY }
+  );
+  return result.element;
+}
+
+const contextMenu = document.getElementsByClassName("context-menu")[0];
+
+function showContextMenu(x, y) {
+  contextMenu.style.left = `${x}px`;
+  contextMenu.style.top = `${y}px`;
+  contextMenu.style.display = "block";
+}
+
+document.addEventListener("click", function () {
+  contextMenu.style.display = "none";
+});
+
+function editTask() {
+  if (rightClickedCard !== null) {
+    const newTaskText = prompt(
+      "Edit task:-",
+      rightClickedCard.querySelector("span").textContent
+    );
+    if (newTaskText !== "") {
+      rightClickedCard.querySelector("span").textContent = newTaskText;
+      updateLocalStorage();
     }
+  }
+}
+
+function deleteTask() {
+  if (rightClickedCard !== null) {
+    const columnId = rightClickedCard.parentElement.id.replace("-tasks", "");
+    rightClickedCard.remove();
+    updateTaskCount(columnId);
+    updateLocalStorage();
+  }
+}
+
+function updateTaskCount(columnId) {
+  const count = document.querySelectorAll(`#${columnId}-tasks .card`).length;
+  document.getElementById(`${columnId}-count`).textContent = count;
+}
+
+function saveTaskToLocalStorage(columnId, taskText, taskDate) {
+  const tasks = JSON.parse(localStorage.getItem(columnId)) || [];
+  tasks.push({ text: taskText, date: taskDate }); 
+  localStorage.setItem(columnId, JSON.stringify(tasks));
+}
+
+function loadTasksFromLocalStorage() {
+  ["todo", "doing", "done"].forEach((columnId) => {
+    const tasks = JSON.parse(localStorage.getItem(columnId)) || [];
+    tasks.forEach(({ text, date }) => {
+      const taskElement = createTaskElement(text, date);
+      document.getElementById(`${columnId}-tasks`).appendChild(taskElement);
+    });
+    updateTaskCount(columnId);
   });
-});
+}
+
+function updateLocalStorage() {
+  ["todo", "doing", "done"].forEach((columnId) => {
+    const tasks = [];
+    document.querySelectorAll(`#${columnId}-tasks .card`).forEach((card) => {
+      const taskText = card.querySelector("span").textContent;
+      const taskDate = card.querySelector("small").textContent;
+      tasks.push({ text: taskText, date: taskDate }); 
+    });
+    localStorage.setItem(columnId, JSON.stringify(tasks)); 
+  });
+}
