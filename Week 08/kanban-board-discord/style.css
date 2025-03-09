@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-/* CSS Reset */
+/* css reset */
 * {
   margin: 0;
   padding: 0;
@@ -18,7 +18,9 @@ body {
 
 .board {
   display: flex;
-  /* flex-direction: row; */
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   gap: 20px;
 }
 
@@ -35,12 +37,12 @@ body {
 
 .column h2 {
   text-align: center;
-  color: #333;
+  color: #333333;
   margin-bottom: 20px;
 }
 
 .tasks {
-  min-height: 200px;
+  min-height: 400px;
 }
 
 .task-input {
@@ -57,18 +59,19 @@ body {
   border-radius: 4px;
   border: none;
   background-color: #3066be;
-  margin-top: 10px;
   color: #ffffff;
   font-weight: bold;
   cursor: pointer;
+  margin-top: 10px;
   transition: all 0.3s ease-in-out;
 }
 
 .add-task:hover {
-  background-color: rgb(30, 64, 118);
+  background-color: #1c3d72;
 }
 
 .card {
+  position: relative;
   background-color: #427aa1;
   padding: 10px;
   margin-bottom: 10px;
@@ -76,34 +79,41 @@ body {
   color: #ffffff;
   cursor: grab;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 .card:hover {
+  background-color: #26455b;
   transform: scale(1.05);
-}
-
-.card.dragging {
-  display: none;
 }
 
 .context-menu {
   display: none;
   position: absolute;
   background-color: #ffffff;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   padding: 10px 0;
   border-radius: 4px;
-  z-index: 1000;
 }
 
 .context-menu ul li {
   list-style: none;
   padding: 8px 20px;
   cursor: pointer;
-  color: #333;
+  color: #333333;
 }
+
 .context-menu ul li:hover {
   background-color: #f4f4f4;
+}
+
+#time {
+  text-align: end;
+  display: block;
+  font-style: italic;
+  color: #ffffff;
+  font-size: 12px;
 }
