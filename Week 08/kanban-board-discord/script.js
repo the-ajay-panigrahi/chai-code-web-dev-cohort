@@ -30,7 +30,9 @@ function createTaskElement(taskText, taskDate) {
 }
 
 function dragStart() {
-  this.classList.add("dragging");
+  setTimeout(() => {
+    this.classList.add("dragging");
+  }, 10);
   draggedCard = this;
 }
 
@@ -51,7 +53,37 @@ columns.forEach((column) => {
 function dragOver(event) {
   event.preventDefault();
   // chipkane dega
-  this.appendChild(draggedCard);
+
+  const afterElement = getDragAfterElement(this, event.pageY);
+  //  = = =
+  if (afterElement === null) {
+    this.appendChild(draggedCard);
+  } else {
+    this.insertBefore(draggedCard, afterElement);
+  }
+}
+
+function getDragAfterElement(container, y) {
+  const draggableElements = [
+    ...container.querySelectorAll(".card:not(.dragging)"),
+  ]; // converting Nodelist to Array
+
+  const result = draggableElements.reduce(
+    (afterElement, currentElement) => {
+      const box = currentElement.getBoundingClientRect();
+
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > afterElement.offset) {
+        return { offset: offset, element: currentElement };
+      } else {
+        return afterElement;
+      }
+    },
+    {
+      offset: Number.NEGATIVE_INFINITY,
+    }
+  );
+  return result.element;
 }
 
 const contextmenu = document.getElementsByClassName("context-menu")[0];
