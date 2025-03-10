@@ -112,7 +112,7 @@ function editTask() {
     const newTaskText = prompt(
       "Edit task:-",
       rightClickedCard.querySelector("span").textContent
-    );
+    ).trim();
     if (newTaskText !== "") {
       rightClickedCard.querySelector("span").textContent = newTaskText;
       updateLocalStorage();
@@ -136,7 +136,7 @@ function updateTaskCount(columnId) {
 
 function saveTaskToLocalStorage(columnId, taskText, taskDate) {
   const tasks = JSON.parse(localStorage.getItem(columnId)) || [];
-  tasks.push({ text: taskText, date: taskDate }); 
+  tasks.push({ text: taskText, date: taskDate });
   localStorage.setItem(columnId, JSON.stringify(tasks));
 }
 
@@ -157,8 +157,8 @@ function updateLocalStorage() {
     document.querySelectorAll(`#${columnId}-tasks .card`).forEach((card) => {
       const taskText = card.querySelector("span").textContent;
       const taskDate = card.querySelector("small").textContent;
-      tasks.push({ text: taskText, date: taskDate }); 
+      tasks.push({ text: taskText, date: taskDate });
     });
-    localStorage.setItem(columnId, JSON.stringify(tasks)); 
+    localStorage.setItem(columnId, JSON.stringify(tasks));
   });
 }

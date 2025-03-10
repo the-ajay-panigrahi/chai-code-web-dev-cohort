@@ -13,7 +13,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #cccccc;
+  background-color: #222831;
 }
 
 .board {
@@ -23,7 +23,7 @@ body {
 }
 
 .column {
-  background-color: #ffffff;
+  background-color: #393e46;
   width: 300px;
   min-height: 400px;
   padding: 20px;
@@ -35,7 +35,7 @@ body {
 
 .column h2 {
   text-align: center;
-  color: #333;
+  color: #ffffff;
   margin-bottom: 20px;
 }
 
@@ -56,27 +56,31 @@ body {
   padding: 10px 5px;
   border-radius: 4px;
   border: none;
-  background-color: #3066be;
+  background-color: #d89216;
   margin-top: 10px;
-  color: #ffffff;
+  color: #fff;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
 
 .add-task:hover {
-  background-color: rgb(30, 64, 118);
+  background-color: rgb(124, 94, 26);
+  color: #fff;
 }
 
 .card {
-  background-color: #427aa1;
+  background-color: #e1d89f;
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 4px;
-  color: #ffffff;
+  color: #000000;
   cursor: grab;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .card:hover {
@@ -121,6 +125,6 @@ body {
   text-align: end;
   display: block;
   font-style: italic;
-  color: #ffffff;
+  color: #000;
   font-size: 12px;
 }
