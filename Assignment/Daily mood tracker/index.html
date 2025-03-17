@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Mood Tracker</title>
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>
+      Daily Mood Tracker
+      <img id="logo" src="./assets/chai-logo.svg" alt="chai ka logo" />
+    </h1>
+    <ul id="mood-list-container">
+      <li onclick="logMood('😊 (Happy)')">😊 (Happy)</li>
+      <li onclick="logMood('🥹 (Sad)')">🥹 (Sad)</li>
+      <li onclick="logMood('😐 (Neutral)')">😐 (Neutral)</li>
+      <li onclick="logMood('😃 (Excited)')">😃 (Excited)</li>
+      <li onclick="logMood('😡 (Angry)')">😡 (Angry)</li>
+    </ul>
+    <div id="display-mood-time-line">
+      <h2>View Mood Time Line Based On:-</h2>
+      <div id="button-list">
+        <button onclick="displayMoodTimeLine(`Day`)">Day</button>
+        <button onclick="displayMoodTimeLine(`Week`)">Week</button>
+        <button onclick="displayMoodTimeLine(`Month`)">Month</button>
+      </div>
+    </div>
+    <div id="mood-time-line"></div>
+    <div id="mood-logged-popup" class="popup">Mood Logged Successfully!</div>
+    <script src="./script.js"></script>
+  </body>
+</html>

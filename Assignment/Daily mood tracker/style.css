@@ -1,0 +1,213 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #112d4e;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 50px;
+  margin-top: 10px;
+  text-decoration: wavy underline;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+#logo {
+  width: 50px;
+  height: 65px;
+  object-fit: contain;
+}
+
+#mood-list-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  min-height: 100px;
+  margin: 20px;
+  flex-wrap: wrap;
+}
+
+#mood-list-container li {
+  list-style: none;
+  font-size: 22px;
+  cursor: pointer;
+  background-color: #ffffff;
+  padding: 10px 15px;
+  border-radius: 100px;
+  color: #000;
+  transition: all 0.3s ease-in-out;
+  border: 5px solid #fffb00;
+  font-weight: bold;
+  margin: 5px;
+  width: 200px;
+}
+
+#mood-list-container li:hover {
+  background-color: #3f72af;
+  color: #fff;
+  transform: scale(1.1);
+  border: 5px solid #ffffff;
+}
+
+#display-mood-time-line h2 {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-weight: normal;
+}
+
+button {
+  padding: 10px 30px;
+  margin-inline: 5px;
+  font-size: 20px;
+  background-color: #3f72af;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 7px;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 10px;
+}
+
+button:hover {
+  background-color: #255ea4;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.mood {
+  display: block;
+  padding: 2px 10px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.mood:hover {
+  transform: scale(1.05);
+  font-weight: bold;
+}
+
+#mood-time-line {
+  position: relative;
+  color: #000;
+  border-radius: 7px;
+  margin-top: 20px;
+  background-color: #fff;
+}
+
+.time {
+  font-style: italic;
+}
+
+#cancel-btn {
+  width: 23px;
+  right: 5px;
+  top: 7px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #3f72af;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 18px;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.5s ease, top 0.5s ease;
+}
+
+.popup.show {
+  display: block;
+  opacity: 1;
+  top: 40px;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 36px;
+  }
+
+  #logo {
+    width: 40px;
+    height: 50px;
+    object-fit: contain;
+  }
+
+  #mood-list-container {
+    gap: 15px;
+    /* flex-direction: column; */
+  }
+
+  #mood-list-container li {
+    font-size: 18px;
+    padding: 8px 12px;
+  }
+
+  button {
+    padding: 8px 20px;
+    font-size: 18px;
+  }
+
+  .mood {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  #logo {
+    width: 35px;
+    height: 30px;
+    object-fit: contain;
+  }
+
+  h2 {
+    font-size: 17px;
+    font-weight: normal;
+  }
+
+  #mood-list-container {
+    gap: 10px;
+  }
+
+  #mood-list-container li {
+    font-size: 16px;
+    padding: 6px 10px;
+  }
+
+  button {
+    padding: 6px 15px;
+    font-size: 16px;
+  }
+
+  .mood {
+    font-size: 16px;
+  }
+}
