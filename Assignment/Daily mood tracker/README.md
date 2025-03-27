@@ -2,6 +2,9 @@
 
 A simple web application to track and log your daily mood. It allows you to log moods, view your mood history and track your moods over different time ranges (day, week or month). The app is built using HTML, CSS and JavaScript and makes use of `localStorage` to persist your mood data.
 
+## Live Demo
+You can try the project live by clicking [here](https://chaicode-mood-tracker.vercel.app/).
+
 ## Features
 
 - Log moods (Happy, Sad, Neutral, Excited, Angry)
