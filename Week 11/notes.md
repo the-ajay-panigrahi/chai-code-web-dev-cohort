@@ -29,3 +29,6 @@ Behind the scenes, Node.js takes your code and wraps it like this:
 - **\_\_filename** → Full path of the current file.
 
 - **\_\_dirname** → Directory name of the current module.
+
+
+when ever u run a file in node js a node process is made. The node process has two main parts 1) Main thread 2) Thread pool. In main thread first project initialization happens (init project)

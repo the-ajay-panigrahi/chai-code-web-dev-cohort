@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-fs.writeFile("./generated.txt", "Jai Shree Ram", () => {});
+fs.writeFile("./Week 11/generated.txt", "Jai Shree Ram", () => {});
 
 console.log({ __filename, __dirname });
 
